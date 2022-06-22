@@ -1,0 +1,25 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RepositorioAcademico.WebApp.Data;
+using RepositorioAcademico.WebApp.Models;
+
+namespace RepositorioAcademico.WebApp.ViewComponents
+{
+    [ViewComponent(Name = "selectcursos")]
+    public class SelectAnosViewComponent : ViewComponent
+    {
+        private readonly RepositorioContext _context;
+        public IEnumerable<Curso> CursosDisponiveis { get; set; }
+        public SelectAnosViewComponent(RepositorioContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            CursosDisponiveis = await _context.Cursos.AsNoTracking().Where(e => e.Ativo).ToListAsync();
+
+            return View(CursosDisponiveis);
+        }
+    }
+}

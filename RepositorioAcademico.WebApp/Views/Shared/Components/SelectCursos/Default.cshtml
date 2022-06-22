@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Curso>
+
+
+<option>Please select one</option>
+@foreach(var curso in Model){
+    <option value="@curso.Id">@curso.Nome</option>
+}

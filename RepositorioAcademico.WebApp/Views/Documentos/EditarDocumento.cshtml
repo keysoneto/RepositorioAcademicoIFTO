@@ -1,0 +1,76 @@
+﻿@model DocumentoViewModel
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Editar Documento";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form enctype="multipart/form-data" asp-action="EditarDocumento">
+            <div class="form-group mb-4">
+                <input type="hidden" asp-for="Id"/>
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" value="@Model.Titulo"/>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Autor" class="control-label"></label>
+                <input asp-for="Autor" class="form-control" value="@Model.Autor"/>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Orientador" class="control-label"></label>
+                <input asp-for="Orientador" class="form-control" value="@Model.Orientador"/>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Ano" class="control-label"></label>
+                <input asp-for="Ano" class="form-control" value="@Model.Ano"/>
+            </div>
+            @{
+                if(@Model.Visivel)
+                {
+                    <div class="form-group mb-4">
+                    <input asp-for="Visivel" type="radio" value="true" checked/>Ativo
+                    <br />
+                    <input asp-for="Visivel" type="radio" value="false" />Inativo
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group mb-4">
+                    <input asp-for="Visivel" type="radio" value="true" />Ativo
+                    <br />
+                    <input asp-for="Visivel" type="radio" value="false" checked/>Inativo
+                    </div>
+                }
+            }
+
+            <div class="col-md-6 mb-4">
+                <div class="form-group">
+                    <label asp-for="URI" class="control-label">Documento</label>
+                    <div class="custom-file">
+                        <input asp-for="URI" class="custom-file-input" id="customFile">
+                    </div>
+                    <span asp-validation-for="URI" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn btn-success" type="submit">
+                    Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{  
+    <script type="text/javascript">  
+        // Add the following code if you want the name of the file appear on select  
+        $(".custom-file-input").on("change", function () {  
+            var fileName = $(this).val().split("\\").pop();  
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);  
+        });  
+    </script>  
+}  

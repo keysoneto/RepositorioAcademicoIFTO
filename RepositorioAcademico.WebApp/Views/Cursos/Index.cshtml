@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RepositorioAcademico.WebApp.Models.Curso>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Cursos";
+}
+
+<h4 class="text-center text-uppercase">Lista de Cursos</h4>
+
+<p>
+    <a asp-action="CadastrarCurso" class="btn btn-sm btn-success rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Cadastrar Curso</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var curso in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/cursos/@curso.Logo"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                    @curso.Nome
+                </td>
+                <td>@curso.Ativo</td>
+                <td>@curso.Id</td>
+                <td><a asp-action="EditarCurso" asp-route-idCurso="@curso.Id" class="btn btn-sm btn-success rounded-0 text-uppercase"><i class="fas fa-pen"></i> Editar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

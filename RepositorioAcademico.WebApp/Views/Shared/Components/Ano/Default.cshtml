@@ -1,0 +1,8 @@
+﻿@model SelectAnos
+
+@foreach (var ano in Model.AnosDisponiveis)
+{
+    <a class="dropdown-item" asp-controller="Documentos" asp-action="Index" asp-route-idCurso="@Model.CursoId" asp-route-ano="@ano">
+        @ano
+    </a>
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<RepositorioAcademico.WebApp.Models.Documento>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Documentos";
+    var documentoBase = Model.FirstOrDefault();
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div>
+        <header class="text-center w-100 mb-4">
+            <h1>@documentoBase.Curso.Nome</h1>
+        </header>
+        <main>
+            <div class="d-flex justify-content-center w-100 pb-2 pt-2">
+                <div class="col-lg-5 col-sm-12">
+                    <form method="post" asp-controller="Documentos" asp-action="BuscarPorTitulo" class="search">
+                        <div class="input-group w-100">
+                            <input hidden name="idCurso" value="@documentoBase.CursoId" />
+                            <input hidden name="ano" value="@documentoBase.Ano" />
+                            <input type="text" name="titulo" class="form-control" placeholder="Buscar por titulo">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @{
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2" scope="col">@Html.DisplayNameFor(e => e.Titulo).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Autor).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Orientador).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Ano).ToUpper()</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var documento in Model)
+                        {
+                            <tr>
+                                <th colspan="2" scope="row"><a href="~/documentos/@documento.URI" target="_blank">@documento.Titulo</a></th>
+                                <td>@documento.Autor</td>
+                                <td>@documento.Orientador</td>
+                                <td>@documento.Ano</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2" scope="col">@Html.DisplayNameFor(e => e.Titulo).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Autor).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Orientador).ToUpper()</th>
+                            <th scope="col">@Html.DisplayNameFor(e => e.Ano).ToUpper()</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        </main>
+    </div>
+</body>

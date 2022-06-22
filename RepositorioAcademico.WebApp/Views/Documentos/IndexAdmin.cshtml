@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Documento>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Documentos";
+}
+
+<h4 class="text-center text-uppercase">Lista de Documentos</h4>
+
+<p>
+    <a asp-action="CadastrarDocumento" class="btn btn-sm btn-success rounded-0 text-uppercase"><i class="fas fa-plus-circle"></i> Cadastrar Documento</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+            <th>@Html.DisplayNameFor(model => model.Autor)</th>
+            <th>@Html.DisplayNameFor(model => model.Orientador)</th>
+            <th>@Html.DisplayNameFor(model => model.Ano)</th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var documento in Model)
+        {
+            <tr>
+                <td>@documento.Titulo</td>
+                <td>@documento.Autor</td>
+                <td>@documento.Orientador</td>
+                <td>@documento.Ano</td>
+                <td>@documento.Id</td>
+                <td><a asp-action="EditarDocumento" asp-route-idDocumento="@documento.Id" class="btn btn-sm btn-success rounded-0 text-uppercase"><i class="fas fa-pen"></i> Editar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

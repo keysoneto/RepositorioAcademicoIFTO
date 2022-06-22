@@ -1,0 +1,68 @@
+﻿@using RepositorioAcademico.WebApp.ViewModels
+@model DocumentoViewModel
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Adicionar Documento";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row md-4 w-50 mx-auto">
+    <div class="col">
+        <form enctype="multipart/form-data" asp-action="CadastrarDocumento">
+            <div class="form-group mb-4">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Autor" class="control-label"></label>
+                <input asp-for="Autor" class="form-control" />
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Orientador" class="control-label"></label>
+                <input asp-for="Orientador" class="form-control" />
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Ano" class="control-label"></label>
+                <input asp-for="Ano" class="form-control" />
+            </div>
+            <div class="form-group mb-4">
+                <input asp-for="Visivel" type="radio" value="true" />Ativo
+                <br />
+                <input asp-for="Visivel" type="radio" value="false" />Inativo
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="CursoId" class="control-label"></label>
+                <select asp-for="CursoId" class="form-control">
+                    <vc:selectcursos></vc:selectcursos>
+                </select>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-group">
+                    <label class="control-label">Arquivo</label>
+                    <div class="custom-file">
+                        <input asp-for="URI" class="custom-file-input" id="customFile">
+                    </div>
+                    <span asp-validation-for="URI" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success" type="submit">
+                    Adicionar Documento
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{  
+    <script type="text/javascript">  
+        // Add the following code if you want the name of the file appear on select  
+        $(".custom-file-input").on("change", function () {  
+            var fileName = $(this).val().split("\\").pop();  
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);  
+        });  
+    </script>  
+}  

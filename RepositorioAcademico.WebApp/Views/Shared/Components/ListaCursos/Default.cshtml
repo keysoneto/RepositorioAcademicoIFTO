@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Curso>
+
+@foreach (var curso in Model)
+{
+    var idCollapse = $"collapse{curso.Id}";
+    var headCardName = $"heading{curso.Id}";
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <a class="btn btn-link" data-toggle="collapse" data-target="#@idCollapse" aria-expanded="true" aria-controls="@idCollapse">
+                <div class="card-header d-flex flex-wrap align-items-center" id="@headCardName">
+                    <div class="d-inline-block p-1" style="width:20%">
+                        <img src="~/images/cursos/@curso.Logo"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                    </div>
+                    <div class="d-inline-block p-1" style="width:80%; white-space: normal">
+                        <p>@curso.Nome</p>
+                    </div>
+                </div>
+            </a>
+
+            <div id="@idCollapse" class="collapse" aria-labelledby="@headCardName" data-parent="#accordionExample">
+                <vc:ano id-curso="@curso.Id"></vc:ano>
+            </div>
+        </div>
+    </div>
+}
