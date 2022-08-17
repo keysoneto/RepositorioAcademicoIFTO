@@ -31,11 +31,15 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult BuscarTodosPorTitulo(string titulo)
+    public IActionResult BuscarTodosPorTitulo(string busca)
     {
         var documentos = _context.Documentos.AsNoTracking()
             .Include(e => e.Curso)
-            .Where(x => x.Titulo.Contains(titulo)).ToList();
+            .Where(x => 
+                x.Titulo.Contains(busca)
+                || x.Autor.Contains(busca)
+                || x.Orientador.Contains(busca)
+                || x.Ano.ToString().Contains(busca)).ToList();
 
         if (documentos.Count() == 0) return View("Error");
 

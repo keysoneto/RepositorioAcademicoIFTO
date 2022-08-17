@@ -38,11 +38,15 @@ public class DocumentosController : Controller
     }
 
     [HttpPost]
-    public IActionResult BuscarPorTitulo(Guid idCurso, int ano, string titulo)
+    public IActionResult BuscarPorTitulo(Guid idCurso, int ano, string busca)
     {
         var documentos = _context.Documentos.AsNoTracking()
             .Include(e => e.Curso)
-            .Where(x => x.CursoId == idCurso && x.Ano == ano && x.Titulo.Contains(titulo));
+            .Where(x => x.CursoId == idCurso 
+                && x.Ano == ano 
+                && (x.Titulo.Contains(busca)
+                    || x.Autor.Contains(busca)
+                    || x.Orientador.Contains(busca)));
 
         if (documentos.Count() == 0) return View("Error");
 
